@@ -30,6 +30,16 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html, body {
+            width: 100%;
+            height: 100%;
+            overflow-x: hidden;
+        }
         body {
             font-family: 'Press Start 2P', cursive;
             background: linear-gradient(to bottom, #000011, #000033);
@@ -37,6 +47,15 @@
         }
         canvas {
             image-rendering: pixelated;
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+        .game-container {
+            width: 100%;
+            max-width: 640px;
+            margin: 0 auto;
+            padding: 0;
         }
         .glow-text {
             text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
@@ -48,26 +67,45 @@
             0%, 50% { opacity: 1; }
             51%, 100% { opacity: 0; }
         }
+        @media (max-width: 640px) {
+            body {
+                padding: 0 !important;
+            }
+            .text-2xl {
+                font-size: 1rem !important;
+            }
+            .gap-8 {
+                gap: 0.5rem !important;
+            }
+            .text-sm {
+                font-size: 0.6rem !important;
+            }
+            .text-xs {
+                font-size: 0.5rem !important;
+            }
+        }
     </style>
 </head>
-<body class="flex flex-col items-center justify-center p-4">
-    <div class="text-center mb-4">
-        <h1 class="text-2xl md:text-4xl text-green-400 glow-text mb-2">SPACE INVADERS</h1>
-        <div class="flex justify-center gap-8 text-sm md:text-base">
-            <div class="text-white">SCORE: <span id="score" class="text-yellow-400">0</span></div>
-            <div class="text-white">WAVE: <span id="wave" class="text-cyan-400">1</span></div>
-            <div class="text-white">LIVES: <span id="lives" class="text-red-400">3</span></div>
-            <div class="text-white">HI-SCORE: <span id="hiscore" class="text-green-400">0</span></div>
+<body class="flex flex-col items-center justify-center p-2 md:p-4">
+    <div class="game-container">
+        <div class="text-center mb-2 md:mb-4 px-2">
+            <h1 class="text-2xl md:text-4xl text-green-400 glow-text mb-2">SPACE INVADERS</h1>
+            <div class="flex justify-center gap-2 md:gap-8 text-xs md:text-base flex-wrap">
+                <div class="text-white">SCORE: <span id="score" class="text-yellow-400">0</span></div>
+                <div class="text-white">WAVE: <span id="wave" class="text-cyan-400">1</span></div>
+                <div class="text-white">LIVES: <span id="lives" class="text-red-400">3</span></div>
+                <div class="text-white">HI-SCORE: <span id="hiscore" class="text-green-400">0</span></div>
+            </div>
         </div>
-    </div>
-    
-    <canvas id="gameCanvas" class="border-4 border-green-500 rounded-lg shadow-lg shadow-green-500/30"></canvas>
-    
-    <div id="gameMessage" class="absolute text-2xl text-white glow-text hidden"></div>
-    
-    <div class="mt-4 text-xs text-gray-400 text-center">
-        <p>← → or A/D to move | SPACE to shoot | P to pause</p>
-        <p class="mt-1">Press SPACE to start</p>
+        
+        <canvas id="gameCanvas" class="border-4 border-green-500 rounded-lg shadow-lg shadow-green-500/30"></canvas>
+        
+        <div id="gameMessage" class="absolute text-2xl text-white glow-text hidden"></div>
+        
+        <div class="mt-2 md:mt-4 text-xs text-gray-400 text-center px-2">
+            <p>← → or A/D to move | SPACE to shoot | P to pause</p>
+            <p class="mt-1">Press SPACE to start</p>
+        </div>
     </div>
 
     <script>
@@ -90,6 +128,19 @@
         const ctx = canvas.getContext('2d');
         canvas.width = CANVAS_WIDTH;
         canvas.height = CANVAS_HEIGHT;
+        
+        // Responsive canvas sizing
+        function resizeCanvas() {
+            const container = document.querySelector('.game-container');
+            const containerWidth = container.clientWidth;
+            const scale = Math.min(1, containerWidth / CANVAS_WIDTH);
+            canvas.style.width = (CANVAS_WIDTH * scale) + 'px';
+            canvas.style.height = (CANVAS_HEIGHT * scale) + 'px';
+        }
+        
+        window.addEventListener('resize', resizeCanvas);
+        window.addEventListener('orientationchange', resizeCanvas);
+        resizeCanvas();
         
         // Audio Context for Sound Effects
         let audioCtx = null;
