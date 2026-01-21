@@ -47,15 +47,27 @@
         }
         canvas {
             image-rendering: pixelated;
-            max-width: 100%;
+            width: 100%;
             height: auto;
             display: block;
+            margin: 0;
         }
         .game-container {
             width: 100%;
             max-width: 640px;
             margin: 0 auto;
             padding: 0;
+        }
+        @media (max-width: 640px) {
+            .game-container {
+                max-width: 100%;
+                padding: 0;
+            }
+            canvas {
+                border-radius: 0 !important;
+                border-left: none !important;
+                border-right: none !important;
+            }
         }
         .glow-text {
             text-shadow: 0 0 10px #0f0, 0 0 20px #0f0, 0 0 30px #0f0;
@@ -68,8 +80,18 @@
             51%, 100% { opacity: 0; }
         }
         @media (max-width: 640px) {
+            .game-container {
+                max-width: 100%;
+                padding: 0;
+            }
+            canvas {
+                border-radius: 0 !important;
+                border-left: none !important;
+                border-right: none !important;
+            }
             body {
                 padding: 0 !important;
+                justify-content: flex-start !important;
             }
             .text-2xl {
                 font-size: 1rem !important;
@@ -82,6 +104,12 @@
             }
             .text-xs {
                 font-size: 0.5rem !important;
+            }
+            .mb-2 {
+                margin-bottom: 0.25rem !important;
+            }
+            .mt-2 {
+                margin-top: 0.25rem !important;
             }
         }
     </style>
@@ -132,14 +160,15 @@
         // Responsive canvas sizing
         function resizeCanvas() {
             const container = document.querySelector('.game-container');
-            const containerWidth = container.clientWidth;
-            const scale = Math.min(1, containerWidth / CANVAS_WIDTH);
+            const containerWidth = window.innerWidth <= 640 ? window.innerWidth : Math.min(container.clientWidth, 640);
+            const scale = containerWidth / CANVAS_WIDTH;
             canvas.style.width = (CANVAS_WIDTH * scale) + 'px';
             canvas.style.height = (CANVAS_HEIGHT * scale) + 'px';
         }
         
         window.addEventListener('resize', resizeCanvas);
         window.addEventListener('orientationchange', resizeCanvas);
+        setTimeout(resizeCanvas, 100);
         resizeCanvas();
         
         // Audio Context for Sound Effects
