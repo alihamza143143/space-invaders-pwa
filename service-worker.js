@@ -1,8 +1,10 @@
-const CACHE_NAME = 'space-invaders-v2';
+const CACHE_NAME = 'space-invaders-v3';
 const urlsToCache = [
     './',
     './index.html',
+    './game.html',
     './manifest.json',
+    './assets/BitDashLogo.jpeg',
     './icons/icon.svg',
     './icons/icon-72x72.png',
     './icons/icon-96x96.png',

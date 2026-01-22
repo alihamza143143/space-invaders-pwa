@@ -29,7 +29,7 @@
     "rewrites": [
       {
         "source": "**",
-        "destination": "/instructions.html"
+        "destination": "/index.html"
       }
     ]
   }
