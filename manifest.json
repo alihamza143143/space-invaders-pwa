@@ -2,7 +2,7 @@
     "name": "Space Invaders",
     "short_name": "Space Invaders",
     "description": "Classic Space Invaders arcade game - defend Earth from alien invasion!",
-    "start_url": "./index.html",
+    "start_url": "./instructions.html",
     "display": "fullscreen",
     "orientation": "any",
     "background_color": "#000011",
