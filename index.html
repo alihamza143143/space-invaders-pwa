@@ -112,9 +112,220 @@
                 margin-top: 0.25rem !important;
             }
         }
+
+        /* Install Popup Styles */
+        .install-popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 1;
+            transition: opacity 0.5s ease-out;
+        }
+        .install-popup-overlay.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        .install-popup {
+            background: linear-gradient(135deg, #000022 0%, #001144 100%);
+            border: 3px solid #00ff00;
+            border-radius: 16px;
+            padding: 24px;
+            max-width: 360px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 0 30px rgba(0, 255, 0, 0.4), 0 0 60px rgba(0, 255, 0, 0.2);
+            animation: popupSlideIn 0.4s ease-out;
+        }
+        @keyframes popupSlideIn {
+            from {
+                transform: translateY(-30px) scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+        .install-popup-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 16px;
+            background: linear-gradient(135deg, #00ff00, #00aa00);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            box-shadow: 0 0 20px rgba(0, 255, 0, 0.5);
+        }
+        .install-popup h2 {
+            color: #00ff00;
+            font-size: 14px;
+            margin-bottom: 12px;
+            text-shadow: 0 0 10px #00ff00;
+        }
+        .install-popup p {
+            color: #aaffaa;
+            font-size: 10px;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+        .install-popup-btn {
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000;
+            border: none;
+            padding: 14px 28px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 11px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 255, 0, 0.4);
+            display: inline-block;
+            text-decoration: none;
+        }
+        .install-popup-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 255, 0, 0.6);
+        }
+        .install-popup-btn:active {
+            transform: translateY(0);
+        }
+        .install-popup-close {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: #00ff00;
+            font-size: 24px;
+            cursor: pointer;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+        }
+        .install-popup-close:hover {
+            opacity: 1;
+        }
+        .install-popup-later {
+            display: block;
+            margin-top: 12px;
+            color: #666;
+            font-size: 8px;
+            cursor: pointer;
+            transition: color 0.3s;
+            background: none;
+            border: none;
+            font-family: 'Press Start 2P', cursive;
+        }
+        .install-popup-later:hover {
+            color: #00ff00;
+        }
+        .ios-instructions {
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 12px;
+            font-size: 8px;
+            color: #aaffaa;
+            line-height: 1.8;
+        }
+        .ios-instructions span {
+            display: inline-block;
+            background: #333;
+            padding: 2px 6px;
+            border-radius: 4px;
+            margin: 0 2px;
+        }
+
+        /* Floating Install Button */
+        .install-floating-btn {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #00ff00, #00cc00);
+            color: #000;
+            border: none;
+            padding: 12px 20px;
+            font-family: 'Press Start 2P', cursive;
+            font-size: 9px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 20px rgba(0, 255, 0, 0.5);
+            z-index: 1000;
+            display: none;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            animation: floatPulse 2s infinite;
+        }
+        .install-floating-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 25px rgba(0, 255, 0, 0.7);
+        }
+        .install-floating-btn.show {
+            display: flex;
+        }
+        @keyframes floatPulse {
+            0%, 100% {
+                box-shadow: 0 4px 20px rgba(0, 255, 0, 0.5);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(0, 255, 0, 0.8);
+            }
+        }
+        @media (max-width: 640px) {
+            .install-popup {
+                padding: 20px;
+                max-width: 320px;
+            }
+            .install-popup h2 {
+                font-size: 12px;
+            }
+            .install-popup p {
+                font-size: 8px;
+            }
+            .install-popup-btn {
+                padding: 12px 24px;
+                font-size: 10px;
+            }
+            .install-floating-btn {
+                bottom: 15px;
+                right: 15px;
+                padding: 10px 16px;
+                font-size: 8px;
+            }
+        }
     </style>
 </head>
 <body class="flex flex-col items-center justify-center p-2 md:p-4">
+    <!-- Install App Popup -->
+    <div id="installPopupOverlay" class="install-popup-overlay" style="display: none;">
+        <div class="install-popup" style="position: relative;">
+            <button class="install-popup-close" id="closePopupBtn">&times;</button>
+            <div class="install-popup-icon">🚀</div>
+            <h2>INSTALL SPACE INVADERS</h2>
+            <p>Install this game on your device for the best experience! Play offline anytime, anywhere.</p>
+            <button id="installPopupBtn" class="install-popup-btn">INSTALL NOW</button>
+            <div id="iosInstructions" class="ios-instructions" style="display: none;">
+                <p>Tap <span>⬆️ Share</span> then <span>Add to Home Screen</span></p>
+            </div>
+            <button class="install-popup-later" id="laterBtn">Maybe Later</button>
+        </div>
+    </div>
+
+    <!-- Floating Install Button -->
+    <button id="installFloatingBtn" class="install-floating-btn">
+        <span>📥</span> INSTALL APP
+    </button>
+
     <div class="game-container">
         <div class="text-center mb-2 md:mb-4 px-2">
             <h1 class="text-2xl md:text-4xl text-green-400 glow-text mb-2">SPACE INVADERS</h1>
@@ -920,6 +1131,123 @@
         
         // Start
         gameLoop();
+
+        // ==================== PWA INSTALL FUNCTIONALITY ====================
+        let deferredPrompt = null;
+        const installPopupOverlay = document.getElementById('installPopupOverlay');
+        const installPopupBtn = document.getElementById('installPopupBtn');
+        const closePopupBtn = document.getElementById('closePopupBtn');
+        const laterBtn = document.getElementById('laterBtn');
+        const installFloatingBtn = document.getElementById('installFloatingBtn');
+        const iosInstructions = document.getElementById('iosInstructions');
+
+        // Detect iOS
+        const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+        // Detect if already installed (standalone mode)
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches || 
+                            window.navigator.standalone === true;
+
+        // Check if user dismissed popup before (only show once per session or use localStorage)
+        const popupDismissed = sessionStorage.getItem('installPopupDismissed');
+
+        // Show popup function
+        function showInstallPopup() {
+            if (isStandalone || popupDismissed) return;
+            installPopupOverlay.style.display = 'flex';
+            
+            if (isIOS) {
+                // Show iOS specific instructions
+                installPopupBtn.style.display = 'none';
+                iosInstructions.style.display = 'block';
+            }
+        }
+
+        // Hide popup with fade effect
+        function hideInstallPopup(showFloatingBtn = true) {
+            installPopupOverlay.classList.add('fade-out');
+            sessionStorage.setItem('installPopupDismissed', 'true');
+            setTimeout(() => {
+                installPopupOverlay.style.display = 'none';
+                installPopupOverlay.classList.remove('fade-out');
+                // Show floating button if install is still available
+                if (showFloatingBtn && (deferredPrompt || isIOS) && !isStandalone) {
+                    installFloatingBtn.classList.add('show');
+                }
+            }, 500);
+        }
+
+        // Handle install click
+        async function handleInstallClick() {
+            if (isIOS) {
+                // Can't programmatically install on iOS, just show instructions
+                alert('To install: Tap the Share button (⬆️) at the bottom of Safari, then tap "Add to Home Screen"');
+                return;
+            }
+            
+            if (!deferredPrompt) {
+                // If no prompt available, the app might already be installed
+                alert('App is ready to install! If you don\'t see an install prompt, the app may already be installed.');
+                return;
+            }
+
+            // Show the install prompt
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            
+            if (outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+                installFloatingBtn.classList.remove('show');
+            } else {
+                console.log('User dismissed the install prompt');
+            }
+            deferredPrompt = null;
+        }
+
+        // Capture the beforeinstallprompt event
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            console.log('Install prompt captured');
+            
+            // Show the popup after a short delay
+            setTimeout(() => {
+                showInstallPopup();
+            }, 1500);
+        });
+
+        // If on iOS, show popup after delay (no beforeinstallprompt event)
+        if (isIOS && !isStandalone && !popupDismissed) {
+            setTimeout(() => {
+                showInstallPopup();
+            }, 1500);
+        }
+
+        // Event listeners for popup buttons
+        closePopupBtn.addEventListener('click', () => hideInstallPopup(true));
+        laterBtn.addEventListener('click', () => hideInstallPopup(true));
+        installPopupBtn.addEventListener('click', async () => {
+            await handleInstallClick();
+            hideInstallPopup(false);
+        });
+
+        // Floating button click
+        installFloatingBtn.addEventListener('click', handleInstallClick);
+
+        // Hide floating button if app gets installed
+        window.addEventListener('appinstalled', () => {
+            console.log('App was installed');
+            installFloatingBtn.classList.remove('show');
+            deferredPrompt = null;
+        });
+
+        // For browsers that don't support beforeinstallprompt (desktop browsers other than Chrome/Edge)
+        // Show floating button after timeout if no prompt captured
+        setTimeout(() => {
+            if (!deferredPrompt && !isIOS && !isStandalone && !popupDismissed) {
+                // Browser doesn't support install prompt, show popup anyway with info
+                showInstallPopup();
+            }
+        }, 3000);
 
         // Register Service Worker for PWA
         if ('serviceWorker' in navigator) {
