@@ -543,7 +543,7 @@
             <button class="play-btn" onclick="startGame()">
                 <span class="play-btn-text">▶ PLAY NOW</span>
             </button>
-            <p style="margin-top: 16px; font-size: 8px; color: #666; letter-spacing: 1px;">Press SPACE or TAP to start</p>
+            <p style="margin-top: 16px; font-size: 8px; color: #666; letter-spacing: 1px;">Tap the button above to start</p>
         </div>
     </div>
     
@@ -585,7 +585,7 @@
             window.location.href = 'index.html';
         }
         
-        // Allow SPACE key to start game
+        // Allow SPACE key to start game (keyboard only)
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 e.preventDefault();
@@ -593,10 +593,8 @@
             }
         });
         
-        // Allow tap to start game
-        document.addEventListener('touchstart', () => {
-            startGame();
-        }, { once: false });
+        // Don't auto-start on touch - let users tap the PLAY button instead
+        // This allows scrolling on mobile without accidentally starting the game
     </script>
 </body>
 </html>
